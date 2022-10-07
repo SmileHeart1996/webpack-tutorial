@@ -1,10 +1,3 @@
-document.write('search page');
-
-class Test {
-    test() {
-        console.log(test);
-    }
+export function search() {
+    return 'Test Search';
 }
-
-const test = new Test();
-test.test();

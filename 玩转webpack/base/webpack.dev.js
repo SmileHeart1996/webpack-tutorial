@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -18,7 +19,7 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                test: /\.(css)$/,
+                test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
             {
@@ -32,7 +33,8 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(),
     ],
     devServer: {
         static: './dist',

@@ -1,5 +1,7 @@
 const path = require('path');
-const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 module.exports = {
     entry: {
@@ -18,12 +20,17 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                test: /\.(css)$/,
+                test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.less$/,
-                use: [miniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    'less-loader',
+                ]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -39,8 +46,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new miniCssExtractPlugin({
+        new MiniCssExtractPlugin({
             filename: '[name]_[contenthash:8].css'
-        })
+        }),
+        new CleanWebpackPlugin()
     ]
 };
